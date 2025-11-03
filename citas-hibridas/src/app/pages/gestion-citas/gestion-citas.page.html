@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gestión de citas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-label position="stacked">Frase</ion-label>
+    <ion-input type="text" [formControl]="form.controls.frase"></ion-input>
+  </ion-item>
+  <ion-text color="danger" *ngIf="form.controls.frase.touched && form.controls.frase.invalid">
+    <small *ngIf="form.controls.frase.errors?.['required']">La frase es obligatoria.</small>
+    <small *ngIf="form.controls.frase.errors?.['minlength']">Mínimo 5 caracteres.</small>
+  </ion-text>
+
+  <ion-item>
+    <ion-label position="stacked">Autor</ion-label>
+    <ion-input type="text" [formControl]="form.controls.autor"></ion-input>
+  </ion-item>
+  <ion-text color="danger" *ngIf="form.controls.autor.touched && form.controls.autor.invalid">
+    <small *ngIf="form.controls.autor.errors?.['required']">El autor es obligatorio.</small>
+    <small *ngIf="form.controls.autor.errors?.['minlength']">Mínimo 2 caracteres.</small>
+  </ion-text>
+
+  <ion-button expand="block" (click)="agregar()" [disabled]="form.invalid">
+    AGREGAR
+  </ion-button>
+
+  <ng-container *ngFor="let c of citas">
+    <app-quote-card
+      [cita]="c"
+      [showDelete]="true"
+      (delete)="eliminar(c.id)">
+    </app-quote-card>
+  </ng-container>
+
+</ion-content>

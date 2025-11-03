@@ -1,0 +1,7 @@
+{
+  "name": "citas-hibridas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
